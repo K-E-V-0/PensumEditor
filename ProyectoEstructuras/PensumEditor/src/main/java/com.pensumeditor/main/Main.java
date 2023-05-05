@@ -8,6 +8,8 @@ public class Main {
 
         userInterface.startMenu();
 
+        System.out.println("Try run");
+
     }
 
 }
