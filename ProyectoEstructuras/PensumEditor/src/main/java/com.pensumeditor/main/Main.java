@@ -9,6 +9,7 @@ public class Main {
         userInterface.startMenu();
 
         System.out.println("Try run");
+        System.out.println("test");
 
     }
 
