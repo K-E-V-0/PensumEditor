@@ -97,7 +97,7 @@ public class UserInterface {
                         """
                 );
         switch (sc.nextInt()) {
-            case 1 -> getSubjectInfo(Integer.valueOf(sc.next()));
+            case 1 -> getSubjectInfo(pensum);
             case 2 -> addSubject(pensum);
             case 3 -> deleteSubject();
             case 4 -> replaceSubject();
@@ -132,8 +132,14 @@ public class UserInterface {
         }
     }
 
-    public void getSubjectInfo(int code) {
-
+    public void getSubjectInfo(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        Ingresa el código de la materia que deseas consultar su información: 
+                        """
+                );
+        int code = sc.nextInt();
     }
 
     public void addSubject(Pensum pensum) {

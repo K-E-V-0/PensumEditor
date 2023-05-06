@@ -40,4 +40,19 @@ public class PositionSubject {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PositionSubject that = (PositionSubject) o;
+
+        return subjectCode == that.subjectCode;
+    }
+
+    @Override
+    public int hashCode() {
+        return subjectCode;
+    }
 }
