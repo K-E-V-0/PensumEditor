@@ -73,6 +73,12 @@ public class Subject implements Serializable {
         this.code = code;
     }
 
+    public Subject(int code, String name, int credits) {
+        this.code = code;
+        this.name = name;
+        this.credits = credits;
+    }
+
     @Override
     public String toString() {
         return "Subject{" +
