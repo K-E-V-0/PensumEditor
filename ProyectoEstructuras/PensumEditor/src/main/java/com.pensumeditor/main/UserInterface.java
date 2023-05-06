@@ -237,8 +237,6 @@ public class UserInterface {
             pensum.updateMatrixByPosition();
         }
         showPensumMenuInterface(pensum);
-
-
     }
 
     public void replaceSubject() {
@@ -246,6 +244,10 @@ public class UserInterface {
     }
 
     public void addSemester() {
+
+    }
+
+    public void removeSemester() {
 
     }
 

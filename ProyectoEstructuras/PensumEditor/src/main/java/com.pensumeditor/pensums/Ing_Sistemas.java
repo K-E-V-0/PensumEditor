@@ -19,7 +19,7 @@ public class Ing_Sistemas {
 
     public List<PositionSubject> Generate_Ing_Sistemas_Matrix() {
 
-        List<PositionSubject> matrix = new ArrayList<>();
+        List<PositionSubject> matrix = new CircularArrayList<>();
 
         matrix.add(new PositionSubject(0, 1, new Subject(1000004, "Cálculo Diferencial", 4, "Matemáticas", "Matemáticas Básicas", "COMPONENTE DE FUNDAMENTACIÓN") ) );
         matrix.add(new PositionSubject(0, 2, new Subject(2025975, "Introducción a la Ingeniería de Sistemas y Computación", 3, "Contexto Profesional y Proyectos de Ingeniería", "-", "COMPONENTE DE FORMACIÓN DISCIPLINAR O PROFESIONAL") ) );
