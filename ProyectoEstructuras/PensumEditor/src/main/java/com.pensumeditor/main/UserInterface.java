@@ -165,7 +165,7 @@ public class UserInterface {
                         Ingresa el semestre en el que quieres añadir la materia
                         """
                 );
-        int semestre = sc.nextInt();
+        int semestre = sc.nextInt() - 1;
 
         System.out.println
                 (
@@ -173,9 +173,9 @@ public class UserInterface {
                         Ingresa el campo en el semestre donde quieres añadir la materia
                         """
                 );
-        int campo = sc.nextInt();
+        int campo = sc.nextInt() - 1;
 
-        if (semestre <= 0 || semestre > pensum.getSemestersNumber() || campo <= 0 || campo > pensum.getSubjectsNumber()){
+        if ((semestre < 0 || semestre > pensum.getSemestersNumber()) && (campo < 0 || campo > pensum.getSubjectsNumber())){
             throw new IndexOutOfBoundsException("Index Out Of Bounds Exception");
         }
 
@@ -194,7 +194,6 @@ public class UserInterface {
                         """
                 );
         String subjectName = sc.nextLine();
-        sc.next();
 
         System.out.println
                 (
@@ -207,7 +206,7 @@ public class UserInterface {
         Subject addSub = new Subject(code, subjectName, credits);
 
         if (pensum.getPensumMatrix().get(semestre)[campo] == null) {
-            pensum.getSubjectArray().add(new PositionSubject(semestre-1, campo-1, addSub));
+            pensum.getSubjectArray().add(new PositionSubject(semestre, campo, addSub));
             pensum.updateMatrixByPosition();
         }
         else{
