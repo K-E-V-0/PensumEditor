@@ -16,9 +16,8 @@ public class UserInterface {
                 (
                         """
                         Bienvenido a Pensum Editor, a continuación se presentan las opciones disponibles:
-                        1) Crear Pensum
+                        1) Crear Pensum - Sebastian
                         2) Cargar Pensum Existente
-                        3) Generar Pensum Aleatorio
                         4) Salir del programa
                         Digita el número de la opción que elegiste a continuación:
                         """
@@ -28,7 +27,6 @@ public class UserInterface {
         switch (option) {
             case 1 -> createPensum();
             case 2 -> loadPensum();
-            case 3 -> generatePensum();
             default -> {
                 if (option != 4) {
                     System.out.println("Opción invalida");
@@ -88,11 +86,12 @@ public class UserInterface {
                 (
                         """
                         Opciones:
-                        1) Consultar información de materia
+                        1) Consultar información de materia - Sebastian
                         2) Agregar materia - Kev
                         3) Eliminar materia - Javier
-                        4) Reemplazar materia
-                        5) Agregar semestre - Kevin
+                        4) Reemplazar materia - Kev
+                        5) Agregar semestre - Kevin ó Sebastian
+                        6) Eliminar semestre - Sebastian
                         6) Volver al menú principal
                         """
                 );
@@ -102,6 +101,7 @@ public class UserInterface {
             case 3 -> deleteSubject(pensum);
             case 4 -> replaceSubject();
             case 5 -> addSemester();
+            case 6 -> removeSemester();
             default -> {
             }
         }
