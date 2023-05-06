@@ -1,37 +1,43 @@
 package com.pensumeditor.data;
 
 public class PositionSubject {
-    private int fila;
-    private int columna;
-    private Subject materia;
+    private int row;
+    private int column;
+    private int subjectCode;
+    private Subject subject;
 
-    public PositionSubject(int fila, int columna, Subject materia) {
-        this.fila = fila;
-        this.columna = columna;
-        this.materia = materia;
+    public PositionSubject(int column, int row, Subject subject) {
+        this.column = column;
+        this.row = row;
+        this.subjectCode = subject.getCode();
+        this.subject = subject;
     }
 
-    public int getFila() {
-        return fila;
+    public PositionSubject(int code) {
+        this.subjectCode = code;
     }
 
-    public void setFila(int fila) {
-        this.fila = fila;
+    public int getRow() {
+        return row;
     }
 
-    public int getColumna() {
-        return columna;
+    public void setRow(int row) {
+        this.row = row;
     }
 
-    public void setColumna(int columna) {
-        this.columna = columna;
+    public int getColumn() {
+        return column;
     }
 
-    public Subject getMateria() {
-        return materia;
+    public void setColumn(int column) {
+        this.column = column;
     }
 
-    public void setMateria(Subject materia) {
-        this.materia = materia;
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 }
