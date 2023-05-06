@@ -3,6 +3,7 @@ package com.pensumeditor.main;
 import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
+import com.pensumeditor.implementations.CircularArrayList;
 import com.pensumeditor.implementations.List;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
@@ -16,7 +17,7 @@ public class UserInterface {
                 (
                         """
                         Bienvenido a Pensum Editor, a continuación se presentan las opciones disponibles:
-                        1) Crear Pensum - Sebastian
+                        1) Crear Pensum
                         2) Cargar Pensum Existente
                         3) Salir del programa
                         Digita el número de la opción que elegiste a continuación:
@@ -36,7 +37,21 @@ public class UserInterface {
     }
 
     public void createPensum() {
-        System.out.println("Creando...");
+        System.out.println
+                (
+                        """
+                        Bienvenido al menú de creación de pensums
+                        Por favor ingresa el nombre del pensum:
+                        """
+                );
+        String nombre = sc.next();
+        System.out.println("Por favor ingresa el número de semestres que deseas que tenga tu pensum:");
+        int semestres = sc.nextInt();
+        System.out.println("Por favor ingresa el número máximo de materias que se verán por semestre: ");
+        int materias = sc.nextInt();
+        List<PositionSubject> positionSubjectList = new CircularArrayList<>();
+
+        displayPensumInterface(nombre, materias, semestres, positionSubjectList);
     }
 
     public void loadPensum() {
@@ -89,7 +104,7 @@ public class UserInterface {
                         1) Consultar información de materia
                         2) Agregar materia
                         3) Eliminar materia
-                        4) Reemplazar materia - Kev
+                        4) Reemplazar materia
                         5) Agregar semestre
                         6) Eliminar semestre
                         7) Volver al menú principal

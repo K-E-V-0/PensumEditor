@@ -149,7 +149,9 @@ public class Pensum {
     public void constructPensum() {
         System.out.println("------------------------" + pensumName + "-----------------------");
         for (int i = 1; i <= semestersNumber; i ++) {
-            System.out.print("--- " + i + " ---");
+            if (i<10) {System.out.print("--- " + i + " ---");}
+            else {System.out.print("---" + i + " ---");}
+
         }
         System.out.println();
         for (int j = 0; j < subjectsNumber; j++) {
