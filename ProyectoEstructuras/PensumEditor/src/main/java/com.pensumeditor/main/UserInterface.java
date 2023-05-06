@@ -82,8 +82,7 @@ public class UserInterface {
         displayPensumInterface("Ingenieria de sistemas", 6, 10, ingSistemas.Generate_Ing_Sistemas_Matrix());
     }
 
-    public void displayPensumInterface(String name, int subjectsNumber, int semestersNumber, List<PositionSubject> subjectArray) {
-        Pensum pensum = new Pensum(name, subjectsNumber, semestersNumber, subjectArray);
+    public void showPensumMenuInterface(Pensum pensum) {
         pensum.constructPensum();
         System.out.println
                 (
@@ -106,6 +105,11 @@ public class UserInterface {
             default -> {
             }
         }
+    }
+
+    public void displayPensumInterface(String name, int subjectsNumber, int semestersNumber, List<PositionSubject> subjectArray) {
+        Pensum pensum = new Pensum(name, subjectsNumber, semestersNumber, subjectArray);
+        showPensumMenuInterface(pensum);
 
     }
 
@@ -141,6 +145,7 @@ public class UserInterface {
                         """
                 );
         int code = sc.nextInt();
+        pensum.getSubjectArray().search(new PositionSubject(code));
     }
 
     public void addSubject(Pensum pensum) {
