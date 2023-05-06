@@ -2,6 +2,7 @@ package com.pensumeditor.main;
 
 import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
+import com.pensumeditor.data.Subject;
 import com.pensumeditor.implementations.List;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
@@ -163,10 +164,29 @@ public class UserInterface {
                         Ingresa un codigo de materia
                         """
                 );
-        int codigo = sc.nextInt();
+        int code = sc.nextInt();
+
+        System.out.println
+                (
+                        """
+                        Ingresa el nombre de la materia
+                        """
+                );
+        String subjectName = sc.next();
+
+        System.out.println
+                (
+                        """
+                        Ingresa los creditos de la materia
+                        """
+                );
+        int credits = sc.nextInt();
+
+        Subject addSub = new Subject(code, subjectName, credits);
 
         if (pensum.getPensumMatrix().get(semestre)[campo] == null) {
-            pensum.getSubjectArray().add(new PositionSubject(codigo));
+            pensum.getSubjectArray().add(new PositionSubject(semestre-1, campo-1, addSub));
+            pensum.updateMatrixByPosition();
         }
     }
 
