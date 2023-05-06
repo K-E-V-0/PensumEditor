@@ -145,7 +145,17 @@ public class UserInterface {
                         """
                 );
         int code = sc.nextInt();
-        pensum.getSubjectArray().search(new PositionSubject(code));
+        int index = pensum.getSubjectArray().search(new PositionSubject(code));
+        if (index == -1) {
+            System.out.println
+                    (
+                            """
+                            El código ingresado no es valido
+                            """
+                    );
+        } else {
+            System.out.println(pensum.getSubjectArray().get(index).getSubject());
+        }
     }
 
     public void addSubject(Pensum pensum) {
