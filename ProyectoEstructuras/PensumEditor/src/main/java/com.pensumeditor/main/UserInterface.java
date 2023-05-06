@@ -98,7 +98,7 @@ public class UserInterface {
                 );
         switch (sc.nextInt()) {
             case 1 -> getSubjectInfo(Integer.valueOf(sc.next()));
-            case 2 -> addSubject();
+            case 2 -> addSubject(pensum);
             case 3 -> deleteSubject();
             case 4 -> replaceSubject();
             case 5 -> addSemester();
@@ -123,7 +123,7 @@ public class UserInterface {
                         """
                 );
         switch (sc.nextInt()) {
-            case 1 -> addSubject();
+            case 1 -> addSubject(pensum);
             case 2 -> deleteSubject();
             case 3 -> replaceSubject();
             case 4 -> addSemester();
@@ -136,8 +136,38 @@ public class UserInterface {
 
     }
 
-    public void addSubject() {
+    public void addSubject(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        Ingresa el semestre en el que quieres añadir la materia
+                        """
+                );
+        int semestre = sc.nextInt();
 
+        System.out.println
+                (
+                        """
+                        Ingresa el campo en el semestre donde quieres añadir la materia
+                        """
+                );
+        int campo = sc.nextInt();
+
+        if (semestre <= 0 || semestre > pensum.getSemestersNumber() || campo <= 0 || campo > pensum.getSubjectsNumber()){
+            throw new IndexOutOfBoundsException("Index Out Of Bounds Exception");
+        }
+
+        System.out.println
+                (
+                        """
+                        Ingresa un codigo de materia
+                        """
+                );
+        int codigo = sc.nextInt();
+
+        if (pensum.getPensumMatrix().get(semestre)[campo] == null) {
+            pensum.getSubjectArray().add(new PositionSubject(codigo));
+        }
     }
 
     public void deleteSubject() {
