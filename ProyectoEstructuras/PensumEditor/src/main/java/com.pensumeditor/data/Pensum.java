@@ -70,6 +70,34 @@ public class Pensum {
         }
     }
 
+    public void addSemester() {
+        semestersNumber ++;
+        pensumMatrix.add(new Integer[subjectsNumber]);
+    }
+    public void addSemester(int semester) {
+        semestersNumber ++;
+        pensumMatrix.add(new Integer[subjectsNumber]);
+        for (int j = 0; j < subjectArray.getSize(); j ++) {
+            PositionSubject positionSubject = subjectArray.get(j);
+            int column = positionSubject.getColumn();
+            if (column > semester - 1) {
+                positionSubject.setColumn(positionSubject.getColumn() + 1);
+            }
+        }
+    }
+
+    public void removeSemester(int semester) {
+        semestersNumber --;
+        pensumMatrix.remove(semester - 1);
+        for (int j = 0; j < subjectArray.getSize(); j ++) {
+            PositionSubject positionSubject = subjectArray.get(j);
+            int column = positionSubject.getColumn();
+            if (column > semester - 1) {
+                positionSubject.setColumn(positionSubject.getColumn() - 1);
+            }
+        }
+    }
+
     public String getPensumName() {
         return pensumName;
     }
@@ -119,7 +147,11 @@ public class Pensum {
     }
 
     public void constructPensum() {
-        System.out.println("------------------------" + pensumName + "------------------------");
+        System.out.println("------------------------" + pensumName + "-----------------------");
+        for (int i = 1; i <= semestersNumber; i ++) {
+            System.out.print("--- " + i + " ---");
+        }
+        System.out.println();
         for (int j = 0; j < subjectsNumber; j++) {
             for (int i = 0; i < semestersNumber; i++) {
                 Integer code = pensumMatrix.get(i)[j];
@@ -135,7 +167,7 @@ public class Pensum {
             }
             System.out.println();
         }
-        System.out.println("-----------------------------------------");
+        System.out.println("---------".repeat(semestersNumber));
     }
 
 }

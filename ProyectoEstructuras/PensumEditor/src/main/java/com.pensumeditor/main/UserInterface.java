@@ -18,7 +18,7 @@ public class UserInterface {
                         Bienvenido a Pensum Editor, a continuación se presentan las opciones disponibles:
                         1) Crear Pensum - Sebastian
                         2) Cargar Pensum Existente
-                        4) Salir del programa
+                        3) Salir del programa
                         Digita el número de la opción que elegiste a continuación:
                         """
                 );
@@ -28,7 +28,7 @@ public class UserInterface {
             case 1 -> createPensum();
             case 2 -> loadPensum();
             default -> {
-                if (option != 4) {
+                if (option != 3) {
                     System.out.println("Opción invalida");
                 }
             }
@@ -86,23 +86,25 @@ public class UserInterface {
                 (
                         """
                         Opciones:
-                        1) Consultar información de materia - Sebastian
-                        2) Agregar materia - Kev
-                        3) Eliminar materia - Javier
+                        1) Consultar información de materia
+                        2) Agregar materia
+                        3) Eliminar materia
                         4) Reemplazar materia - Kev
-                        5) Agregar semestre - Kevin ó Sebastian
-                        6) Eliminar semestre - Sebastian
-                        6) Volver al menú principal
+                        5) Agregar semestre
+                        6) Eliminar semestre
+                        7) Volver al menú principal
                         """
                 );
         switch (sc.nextInt()) {
-            case 1 -> getSubjectInfo(pensum);
-            case 2 -> addSubject(pensum);
-            case 3 -> deleteSubject(pensum);
-            case 4 -> replaceSubject();
-            case 5 -> addSemester();
-            case 6 -> removeSemester();
+            case 1 -> getSubjectInfoOption(pensum);
+            case 2 -> addSubjectOption(pensum);
+            case 3 -> deleteSubjectOption(pensum);
+            case 4 -> replaceSubjectOption();
+            case 5 -> addSemesterOption(pensum);
+            case 6 -> removeSemesterOption(pensum);
+            case 7 -> startMenu();
             default -> {
+                System.out.println("Opción invalida, vuelvelo a intentar: ");
             }
         }
     }
@@ -114,7 +116,7 @@ public class UserInterface {
     }
 
     public void displayRandomPensumInterface(int subjectsNumber, int semestersNumber) {
-        Pensum pensum = new Pensum("Random Pensum", subjectsNumber, semestersNumber);
+        /*Pensum pensum = new Pensum("Random Pensum", subjectsNumber, semestersNumber);
         pensum.constructPensum();
         System.out.println
                 (
@@ -131,13 +133,13 @@ public class UserInterface {
             case 1 -> addSubject(pensum);
             case 2 -> deleteSubject(pensum);
             case 3 -> replaceSubject();
-            case 4 -> addSemester();
+            case 4 -> addSemester(pensum);
             default -> {
             }
-        }
+        }*/
     }
 
-    public void getSubjectInfo(Pensum pensum) {
+    public void getSubjectInfoOption(Pensum pensum) {
         System.out.println
                 (
                         """
@@ -159,7 +161,7 @@ public class UserInterface {
         showPensumMenuInterface(pensum);
     }
 
-    public void addSubject(Pensum pensum) {
+    public void addSubjectOption(Pensum pensum) {
         System.out.println
                 (
                         """
@@ -216,7 +218,7 @@ public class UserInterface {
         showPensumMenuInterface(pensum);
     }
 
-    public void deleteSubject(Pensum pensum) {
+    public void deleteSubjectOption(Pensum pensum) {
         System.out.println
                 (
                         """
@@ -239,16 +241,48 @@ public class UserInterface {
         showPensumMenuInterface(pensum);
     }
 
-    public void replaceSubject() {
+    public void replaceSubjectOption() {
 
     }
 
-    public void addSemester() {
+    public void addSemesterOption(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        ¿En donde quieres insertar el semestre?
+                        1) Al inicio de la carrera
+                        2) Inmediatamente después de un semestre
+                        3) Al final de la carrera
+                        """
+                );
+        switch (sc.nextInt()) {
+            case 1:
+                pensum.addSemester(0);
+                break;
+            case 2:
+                System.out.println("¿Después de qué semestre deseas que se inserte el semestre nuevo?");
+                pensum.addSemester(sc.nextInt());
+                break;
+            case 3:
+                pensum.addSemester();
+                break;
+            default:
+        }
 
+        pensum.updateMatrixByPosition();
+        showPensumMenuInterface(pensum);
     }
 
-    public void removeSemester() {
-
+    public void removeSemesterOption(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        Digita el semestre que deseas eliminar:
+                        """
+                );
+        pensum.removeSemester(sc.nextInt());
+        pensum.updateMatrixByPosition();
+        showPensumMenuInterface(pensum);
     }
 
 }
