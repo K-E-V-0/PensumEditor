@@ -2,7 +2,7 @@ package com.pensumeditor.implementations;
 
 import java.util.NoSuchElementException;
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList <T> implements List <T> {
 
     class Node {
         private T data;

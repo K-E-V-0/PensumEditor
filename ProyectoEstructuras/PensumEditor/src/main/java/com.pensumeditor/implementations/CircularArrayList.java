@@ -2,7 +2,7 @@ package com.pensumeditor.implementations;
 
 import java.util.NoSuchElementException;
 
-public class CircularArrayList<T> implements List<T> {
+public class CircularArrayList <T> implements List <T> {
 
     private T[] array;
     private int start;

@@ -3,10 +3,13 @@ package com.pensumeditor.main;
 import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
+import com.pensumeditor.implementations.ArrayList;
 import com.pensumeditor.implementations.CircularArrayList;
+import com.pensumeditor.implementations.LinkedList;
 import com.pensumeditor.implementations.List;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -19,7 +22,8 @@ public class UserInterface {
                         Bienvenido a Pensum Editor, a continuación se presentan las opciones disponibles:
                         1) Crear Pensum
                         2) Cargar Pensum Existente
-                        3) Salir del programa
+                        3) Pruebas de rendimiento
+                        4) Salir del programa
                         Digita el número de la opción que elegiste a continuación:
                         """
                 );
@@ -28,9 +32,11 @@ public class UserInterface {
         switch (option) {
             case 1 -> createPensum();
             case 2 -> loadPensum();
+            case 3 -> tests();
             default -> {
-                if (option != 3) {
+                if (option != 4) {
                     System.out.println("Opción invalida");
+                    startMenu();
                 }
             }
         }
@@ -71,7 +77,7 @@ public class UserInterface {
     }
 
     public void generatePensum() {
-        System.out.println
+        /*System.out.println
                 (
                         """
                         Ingresa el número de semestres que deseas que tenga el pensum:
@@ -86,7 +92,7 @@ public class UserInterface {
                 );
         int materias = sc.nextInt();
 
-        displayRandomPensumInterface(materias, semestres);
+        displayRandomPensumInterface(materias, semestres);*/
 
     }
 
@@ -393,6 +399,98 @@ public class UserInterface {
         pensum.removeSemester(sc.nextInt());
         pensum.updateMatrixByPosition();
         showPensumMenuInterface(pensum);
+    }
+
+    public void tests() {
+        System.out.println
+                (
+                        """
+                        Bienvenido al menu de test
+                        Ya que las materias se identifican por código, todos los test se hacen sobre
+                        una lista de enteros que representan los códigos de materias (List<Integer>)
+                        ¿Qué implementación deseas utilizar?
+                        1) ArrayList (Lista dinamica)
+                        2) CircularArrayList (Lista dinamica circular)
+                        3) LinkedList (Lista enlazada)
+                        4) DoubleLinkedList (Lista enlazada doble)
+                        5) Volver al menú principal
+                        """
+                );
+        List<Integer> dataStructure = null;
+        int option = sc.nextInt();
+
+        if (option == 1) {
+            dataStructure = new ArrayList<>();
+        } else if (option == 2) {
+            dataStructure = new CircularArrayList<>();
+        } else if (option == 3) {
+            dataStructure = new LinkedList<>();
+        }
+
+        dataStructure.add(1);
+        System.out.println("Por default la lista tiene el dato 1 agregado.");
+
+        System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar: ");
+
+        methodOptions(dataStructure, sc.nextInt());
+
+    }
+
+    public void methodOptions(List<Integer> dataStructure, int n) {
+        Random random = new Random();
+        System.out.println
+                (
+                        """
+                        Las operaciones posibles son:
+                       
+                        1) Agregar n datos aleatorios con pushBack()
+                        2) Obtener n datos en indices aleatorios con get()
+                        3) Sobreescribir n datos aleatorios en indices aleatorios con set()
+                        4) Encontrar n datos aleatorios con search()
+                        5) Eliminar n datos con indices aleatorios con remove()
+                        
+                        9) Volver al menú principal
+                        """
+                );
+        int option = sc.nextInt();
+        switch (option) {
+            case 1:
+                for (int i = 0; i < n; i ++) {
+                    dataStructure.pushBack(random.nextInt(255));
+                }
+                break;
+            case 2:
+                for (int i = 0; i < n; i ++) {
+                    dataStructure.get(random.nextInt(dataStructure.getSize()));
+                }
+                break;
+            case 3:
+                for (int i = 0; i < n; i ++) {
+                    dataStructure.set(random.nextInt(255), random.nextInt(dataStructure.getSize()));
+                }
+                break;
+            case 4:
+                for (int i = 0; i < n; i ++) {
+                    dataStructure.search(random.nextInt(255));
+                }
+                break;
+            case 5:
+                for (int i = 0; i < n; i ++) {
+                    System.out.println(dataStructure.getSize());
+                    dataStructure.remove(random.nextInt(dataStructure.getSize()));
+                }
+                break;
+            default:
+                if (option != 6) {
+                    System.out.println("Opción invalida");
+                    methodOptions(dataStructure, n);
+                }
+                startMenu();
+        }
+        System.out.println(dataStructure);
+        System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar ahora: ");
+        n = sc.nextInt();
+        methodOptions(dataStructure, n);
     }
 
 }
