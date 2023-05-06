@@ -99,7 +99,7 @@ public class UserInterface {
             case 1 -> getSubjectInfoOption(pensum);
             case 2 -> addSubjectOption(pensum);
             case 3 -> deleteSubjectOption(pensum);
-            case 4 -> replaceSubjectOption();
+            case 4 -> replaceSubjectOption(pensum);
             case 5 -> addSemesterOption(pensum);
             case 6 -> removeSemesterOption(pensum);
             case 7 -> startMenu();
@@ -182,33 +182,34 @@ public class UserInterface {
             throw new IndexOutOfBoundsException("Index Out Of Bounds Exception");
         }
 
-        System.out.println
-                (
-                        """
-                        Ingresa un codigo de materia
-                        """
-                );
-        int code = sc.nextInt();
-
-        System.out.println
-                (
-                        """
-                        Ingresa el nombre de la materia
-                        """
-                );
-        String subjectName = sc.next();
-
-        System.out.println
-                (
-                        """
-                        Ingresa los creditos de la materia
-                        """
-                );
-        int credits = sc.nextInt();
-
-        Subject addSub = new Subject(code, subjectName, credits);
-
         if (pensum.getPensumMatrix().get(semestre)[campo] == null) {
+
+            System.out.println
+                    (
+                            """
+                            Ingresa un codigo de materia
+                            """
+                    );
+            int code = sc.nextInt();
+
+            System.out.println
+                    (
+                            """
+                            Ingresa el nombre de la materia
+                            """
+                    );
+            String subjectName = sc.next();
+
+            System.out.println
+                    (
+                            """
+                            Ingresa los creditos de la materia
+                            """
+                    );
+            int credits = sc.nextInt();
+
+            Subject addSub = new Subject(code, subjectName, credits);
+
             pensum.getSubjectArray().add(new PositionSubject(semestre, campo, addSub));
             pensum.updateMatrixByPosition();
         }
@@ -241,8 +242,102 @@ public class UserInterface {
         showPensumMenuInterface(pensum);
     }
 
-    public void replaceSubjectOption() {
+    public void replaceSubjectOption(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        Ingresa el semestre en el que quiere modificar la materia
+                        """
+                );
+        int semestre = sc.nextInt() - 1;
 
+        System.out.println
+                (
+                        """
+                        Ingresa el campo en el semestre donde quiere modificar la materia
+                        """
+                );
+        int campo = sc.nextInt() - 1;
+
+        if ((semestre < 0 || semestre > pensum.getSemestersNumber()) && (campo < 0 || campo > pensum.getSubjectsNumber())){
+            throw new IndexOutOfBoundsException("Index Out Of Bounds Exception");
+        }
+
+        if (pensum.getPensumMatrix().get(semestre)[campo] == null){
+            System.out.println
+                    (
+                            """
+                            Este campo esta vacio, ¿Desea añadir una materia en este espacio?
+                            
+                            1) Si
+                            2) No
+                            """
+                    );
+            int option = sc.nextInt();
+            if (option == 1){
+                System.out.println
+                        (
+                                """
+                                Ingresa un codigo de materia
+                                """
+                        );
+                int code = sc.nextInt();
+
+                System.out.println
+                        (
+                                """
+                                Ingresa el nombre de la materia
+                                """
+                        );
+                String subjectName = sc.next();
+
+                System.out.println
+                        (
+                                """
+                                Ingresa los creditos de la materia
+                                """
+                        );
+                int credits = sc.nextInt();
+
+                Subject addSub = new Subject(code, subjectName, credits);
+
+                pensum.getSubjectArray().add(new PositionSubject(semestre, campo, addSub));
+                pensum.updateMatrixByPosition();
+            }
+        }
+        else{
+            int code = pensum.getPensumMatrix().get(semestre)[campo];
+            int index = pensum.getSubjectArray().search(new PositionSubject(code));
+            System.out.println("Se reemplazara: " + pensum.getSubjectArray().get(index).getSubject());
+            System.out.println
+                    (
+                            """
+                            Ingresa un codigo de materia
+                            """
+                    );
+            int codeSub = sc.nextInt();
+
+            System.out.println
+                    (
+                            """
+                            Ingresa el nombre de la materia
+                            """
+                    );
+            String subjectName = sc.next();
+
+            System.out.println
+                    (
+                            """
+                            Ingresa los creditos de la materia
+                            """
+                    );
+            int credits = sc.nextInt();
+
+            Subject addSub = new Subject(codeSub, subjectName, credits);
+            pensum.getSubjectArray().set(new PositionSubject(semestre, campo, addSub), index);
+            pensum.updateMatrixByPosition();
+        }
+        showPensumMenuInterface(pensum);
     }
 
     public void addSemesterOption(Pensum pensum) {
