@@ -183,7 +183,8 @@ public class UserInterface {
                         Ingresa el nombre de la materia
                         """
                 );
-        String subjectName = sc.next();
+        String subjectName = sc.nextLine();
+        sc.next();
 
         System.out.println
                 (
@@ -199,6 +200,10 @@ public class UserInterface {
             pensum.getSubjectArray().add(new PositionSubject(semestre-1, campo-1, addSub));
             pensum.updateMatrixByPosition();
         }
+        else{
+            System.out.println("El campo elegido ya esta ocupado.");
+        }
+        showPensumMenuInterface(pensum);
     }
 
     public void deleteSubject() {
