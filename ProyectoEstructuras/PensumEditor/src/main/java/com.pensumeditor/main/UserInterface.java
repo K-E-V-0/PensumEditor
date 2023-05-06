@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in).useDelimiter("\n");
     public void startMenu() {
         System.out.println
                 (
@@ -156,6 +156,7 @@ public class UserInterface {
         } else {
             System.out.println(pensum.getSubjectArray().get(index).getSubject());
         }
+        showPensumMenuInterface(pensum);
     }
 
     public void addSubject(Pensum pensum) {
@@ -193,7 +194,7 @@ public class UserInterface {
                         Ingresa el nombre de la materia
                         """
                 );
-        String subjectName = sc.nextLine();
+        String subjectName = sc.next();
 
         System.out.println
                 (
