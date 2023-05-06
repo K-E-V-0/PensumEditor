@@ -60,7 +60,7 @@ public class Pensum {
         }
     }
 
-    public void updateMatrixByPosition(List<PositionSubject> positionSubjectList) {
+    public void updateMatrixByPosition() {
         for (int i = 0; i < subjectArray.getSize(); i ++) {
             pensumMatrix.get(subjectArray.get(i).getColumn())[subjectArray.get(i).getRow()] = subjectArray.get(i).getSubject().getCode();
         }
