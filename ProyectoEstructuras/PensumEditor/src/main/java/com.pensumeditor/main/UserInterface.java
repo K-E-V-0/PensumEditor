@@ -99,7 +99,7 @@ public class UserInterface {
         switch (sc.nextInt()) {
             case 1 -> getSubjectInfo(pensum);
             case 2 -> addSubject(pensum);
-            case 3 -> deleteSubject();
+            case 3 -> deleteSubject(pensum);
             case 4 -> replaceSubject();
             case 5 -> addSemester();
             default -> {
@@ -129,7 +129,7 @@ public class UserInterface {
                 );
         switch (sc.nextInt()) {
             case 1 -> addSubject(pensum);
-            case 2 -> deleteSubject();
+            case 2 -> deleteSubject(pensum);
             case 3 -> replaceSubject();
             case 4 -> addSemester();
             default -> {
@@ -216,7 +216,28 @@ public class UserInterface {
         showPensumMenuInterface(pensum);
     }
 
-    public void deleteSubject() {
+    public void deleteSubject(Pensum pensum) {
+        System.out.println
+                (
+                        """
+                        Ingresa un codigo de materia
+                        """
+                );
+        int code = sc.nextInt();
+        int index = pensum.getSubjectArray().search(new PositionSubject(code));
+        if (index == -1) {
+            System.out.println
+                    (
+                            """
+                            El código ingresado no es valido
+                            """
+                    );
+        } else {
+            pensum.getSubjectArray().remove(index);
+            pensum.updateMatrixByPosition();
+        }
+        showPensumMenuInterface(pensum);
+
 
     }
 
