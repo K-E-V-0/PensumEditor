@@ -128,7 +128,7 @@ public class LinkedList <T> implements List <T> {
             throw new IndexOutOfBoundsException("Index Out Of Bounds Exception");
         }
         Node node = head;
-        for (int i = 0; i <= index; i++) {
+        for (int i = 0; i < index; i++) {
             node = node.next;
         }
         node.data = data;

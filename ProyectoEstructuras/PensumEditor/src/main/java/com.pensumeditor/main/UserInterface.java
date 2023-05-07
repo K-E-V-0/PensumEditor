@@ -508,7 +508,7 @@ public class UserInterface {
                 }
                 startMenu();
         }
-        System.out.println(dataStructure);
+        //System.out.println(dataStructure);
         System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar ahora: ");
         n = sc.nextInt();
         methodOptions(dataStructure, n);
