@@ -3,10 +3,7 @@ package com.pensumeditor.main;
 import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
-import com.pensumeditor.implementations.ArrayList;
-import com.pensumeditor.implementations.CircularArrayList;
-import com.pensumeditor.implementations.LinkedList;
-import com.pensumeditor.implementations.List;
+import com.pensumeditor.implementations.*;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
 import java.util.Random;
@@ -425,6 +422,10 @@ public class UserInterface {
             dataStructure = new CircularArrayList<>();
         } else if (option == 3) {
             dataStructure = new LinkedList<>();
+        } else if (option == 4){
+            dataStructure = new DoubleLinkedList<>();
+        } else if (option == 5){
+            startMenu();
         }
 
         dataStructure.add(1);
@@ -455,30 +456,50 @@ public class UserInterface {
         int option = sc.nextInt();
         switch (option) {
             case 1:
+                long inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
                     dataStructure.pushBack(random.nextInt(255));
                 }
+                long fin = System.nanoTime();
+                long duracion = fin-inicio;
+                System.out.println(duracion);
                 break;
             case 2:
+                inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
                     dataStructure.get(random.nextInt(dataStructure.getSize()));
                 }
+                fin = System.nanoTime();
+                duracion = fin-inicio;
+                System.out.println(duracion);
                 break;
             case 3:
+                inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
                     dataStructure.set(random.nextInt(255), random.nextInt(dataStructure.getSize()));
                 }
+                fin = System.nanoTime();
+                duracion = fin-inicio;
+                System.out.println(duracion);
                 break;
             case 4:
+                inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
                     dataStructure.search(random.nextInt(255));
                 }
+                fin = System.nanoTime();
+                duracion = fin-inicio;
+                System.out.println(duracion);
                 break;
             case 5:
+               inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
                     System.out.println(dataStructure.getSize());
                     dataStructure.remove(random.nextInt(dataStructure.getSize()));
                 }
+                fin = System.nanoTime();
+                duracion = fin-inicio;
+                System.out.println(duracion);
                 break;
             default:
                 if (option != 6) {
