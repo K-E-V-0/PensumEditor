@@ -3,7 +3,7 @@ package com.pensumeditor.main;
 import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
-import com.pensumeditor.implementations.*;
+import com.pensumeditor.datastructures.linear.*;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
 import java.util.Random;

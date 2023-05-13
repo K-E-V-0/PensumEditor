@@ -1,4 +1,4 @@
-package com.pensumeditor.implementations;
+package com.pensumeditor.datastructures.linear;
 
 import java.util.NoSuchElementException;
 

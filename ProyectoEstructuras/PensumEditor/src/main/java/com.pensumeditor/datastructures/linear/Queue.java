@@ -1,4 +1,4 @@
-package com.pensumeditor.implementations;
+package com.pensumeditor.datastructures.linear;
 
 public interface Queue <T> {
     public int getSize();

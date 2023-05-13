@@ -1,6 +1,6 @@
 package com.pensumeditor.data;
 
-public class PositionSubject {
+public class PositionSubject implements Comparable<PositionSubject> {
     private int row;
     private int column;
     private int subjectCode;
@@ -64,5 +64,10 @@ public class PositionSubject {
     @Override
     public int hashCode() {
         return subjectCode;
+    }
+
+    @Override
+    public int compareTo(PositionSubject o) {
+        return Integer.compare(this.subjectCode, o.subjectCode);
     }
 }

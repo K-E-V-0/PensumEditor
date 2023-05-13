@@ -1,8 +1,8 @@
-package com.pensumeditor.implementations;
+package com.pensumeditor.datastructures.linear;
 
 import java.util.NoSuchElementException;
 
-public class QueueLinkedList<T> implements Queue<T> {
+public class StackLinkedList<T> implements Stack<T> {
 
     class Node {
         private T data;
@@ -15,45 +15,40 @@ public class QueueLinkedList<T> implements Queue<T> {
     }
 
     private Node head;
-    private Node tail;
     private int size;
 
-    public QueueLinkedList() {
+    public StackLinkedList() {
         head = null;
-        tail = null;
         size = 0;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public T getFront() {
+    public T getTop() {
         if (isEmpty()){
             throw new NoSuchElementException("No Such Element Exception");
         }
         return head.data;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public boolean isEmpty() {
         return size==0;
     }
 
-    public void enqueue(T data) {
+    public void push(T data) {
         Node node = new Node(data);
         if (isEmpty()) {
             head = node;
         } else {
-            tail.next = node;
+            node.next = head;
+            head = node;
         }
-        tail = node;
         size ++;
     }
 
-    public T dequeue() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("No Such Element Exception");
-        }
+    public T pop() {
         T data = head.data;
         head = head.next;
         size --;
@@ -62,16 +57,16 @@ public class QueueLinkedList<T> implements Queue<T> {
 
     @Override
     public String toString() {
-        if(isEmpty()){
-            return "[ ]";
+        if (isEmpty()) {
+            return "[]";
         }
-        String s = "[ ";
+        String s = "]";
         Node node = head;
         while (node.next != null) {
-            s += node.data + " ";
+            s = node.data + " " + s;
             node = node.next;
         }
-        s += node.data + " ]";
+        s = "[" + " " + node.data + " " +s;
         return s;
     }
 

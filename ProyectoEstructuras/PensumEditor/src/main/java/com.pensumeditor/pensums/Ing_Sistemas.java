@@ -2,9 +2,8 @@ package com.pensumeditor.pensums;
 
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
-import com.pensumeditor.implementations.ArrayList;
-import com.pensumeditor.implementations.CircularArrayList;
-import com.pensumeditor.implementations.List;
+import com.pensumeditor.datastructures.linear.CircularArrayList;
+import com.pensumeditor.datastructures.linear.List;
 
 public class Ing_Sistemas {
     

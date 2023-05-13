@@ -1,16 +1,14 @@
-package com.pensumeditor.implementations;
+package com.pensumeditor.datastructures.linear;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class StackArrayList<T> implements Stack<T> {
-
+public class QueueArrayList <T> implements Queue <T> {
     private T[] array;
     private int size;
     private int capacity;
     private int factor = 2;
 
-    public StackArrayList() {
+    public QueueArrayList() {
         array = (T[]) new Object[factor];
         size = 0;
         capacity = factor;
@@ -28,14 +26,14 @@ public class StackArrayList<T> implements Stack<T> {
         return size == capacity;
     }
 
-    public T getTop() {
+    public T getFront() {
         if (isEmpty()){
             throw new NoSuchElementException("No Such Element Exception");
         }
-        return array[size-1];
+        return array[0];
     }
 
-    public void push(T data) {
+    public void enqueue(T data) {
         if (isFull()) {
             ensureCapacity();
         }
@@ -43,11 +41,14 @@ public class StackArrayList<T> implements Stack<T> {
         size ++;
     }
 
-    public T pop() {
+    public T dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException("No Such Element Exception");
         }
-        T data = array[size-1];
+        T data = array[0];
+        for (int i = 0; i < size - 1; i++) {
+            array[i] = array[i + 1];
+        }
         size --;
         return data;
     }

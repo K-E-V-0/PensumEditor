@@ -1,7 +1,7 @@
 package com.pensumeditor.data;
 
-import com.pensumeditor.implementations.List;
-import com.pensumeditor.implementations.CircularArrayList;
+import com.pensumeditor.datastructures.linear.List;
+import com.pensumeditor.datastructures.linear.CircularArrayList;
 
 import java.util.Random;
 

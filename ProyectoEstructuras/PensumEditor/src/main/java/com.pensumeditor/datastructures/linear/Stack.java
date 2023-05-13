@@ -1,4 +1,4 @@
-package com.pensumeditor.implementations;
+package com.pensumeditor.datastructures.linear;
 
 public interface Stack<T> {
     public T getTop();
