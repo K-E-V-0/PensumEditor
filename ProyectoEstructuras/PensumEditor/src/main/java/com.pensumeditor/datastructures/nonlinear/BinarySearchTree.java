@@ -1,7 +1,6 @@
 package com.pensumeditor.datastructures.nonlinear;
 
 import com.pensumeditor.datastructures.linear.CircularArrayList;
-import com.pensumeditor.datastructures.linear.LinkedList;
 import com.pensumeditor.datastructures.linear.List;
 
 public class BinarySearchTree {
@@ -129,37 +128,46 @@ public class BinarySearchTree {
         return L;
     }
 
-    public void delete(int key) {
-        root = delete(root, key);
-    }
-
-    public Node delete(Node root, int key) {
-        if (root == null) {
-            return root;
+    public void delete(int value) {
+        if (find(value).key == value) {
+            delete(find(value));
         }
-        if (key < root.key) {
-            root.left = delete(root.left, key);
-        } else if (key > root.key) {
-            root.right = delete(root.right, key);
-        } else {
-            if (root.left == null) {
-                return root.right;
-            } else if (root.right == null) {
-                return root.left;
+        else {
+            System.out.println("Element doesn't exist.");
+        }
+    }
+    public void delete(Node N) {
+        if (N.right == null) {
+            if (N.parent != null) {
+                if (N.parent.left == N) {
+                    N.parent.left = N.left;
+                } else {
+                    N.parent.right = N.left;
+                }
+                if (N.left != null) {
+                    N.left.parent = N.parent;
+                }
+            } else {
+                root = N.left;
+                if (N.left != null) {
+                    N.left.parent = null;
+                }
             }
-            root.key = minValue(root.right);
-            root.right = delete(root.right, root.key);
+        } else {
+            Node X = next(N);
+            if (X.left != null) {
+                X.left.parent = X.parent;
+            }
+            if (X.parent.left == X) {
+                X.parent.left = X.right;
+            } else {
+                X.parent.right = X.right;
+            }
+            if (X.right != null) {
+                X.right.parent = X.parent;
+            }
+            N.key = X.key;
         }
-        return root;
-    }
-
-    private int minValue(Node node) {
-        int minValue = node.key;
-        while (node.left != null) {
-            minValue = node.left.key;
-            node = node.left;
-        }
-        return minValue;
     }
 
     public void inOrderTraversal() {

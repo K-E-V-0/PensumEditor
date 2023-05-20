@@ -16,8 +16,11 @@ public class Main {
         bst.insert(5);
         bst.insert(4);
         bst.insert(3);
-        System.out.println(bst.next(bst.find(3)).getKey());
-        System.out.println(bst.rangeSearch(3,5));
+        bst.insert(6);
+        bst.insert(7);
+        bst.inOrderTraversal();
+        bst.delete(2);
+        bst.inOrderTraversal();
     }
 
 }
