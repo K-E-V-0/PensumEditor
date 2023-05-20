@@ -19,6 +19,11 @@ public class BinarySearchTree {
         public int getKey() {
             return key;
         }
+
+        @Override
+        public String toString() {
+            return Integer.toString(key);
+        }
     }
 
     private Node root;
@@ -98,11 +103,14 @@ public class BinarySearchTree {
     }
 
     public Node RightAncestor(Node node) {
-        if (node.key < node.parent.key) {
-            return node.parent;
-        } else {
-            return RightAncestor(node.parent);
+        if (node != null) {
+            if (node.parent != null && node.key < node.parent.key) {
+                return node.parent;
+            } else {
+                return RightAncestor(node.parent);
+            }
         }
+        return null;
     }
 
     public List<Node> rangeSearch(int x, int y) {
