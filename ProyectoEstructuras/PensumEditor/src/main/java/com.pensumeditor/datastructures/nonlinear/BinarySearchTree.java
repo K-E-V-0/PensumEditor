@@ -1,14 +1,19 @@
 package com.pensumeditor.datastructures.nonlinear;
 
+import com.pensumeditor.datastructures.linear.CircularArrayList;
+import com.pensumeditor.datastructures.linear.LinkedList;
+import com.pensumeditor.datastructures.linear.List;
+
 public class BinarySearchTree {
     public class Node {
         private int key;
         private Node left;
         private Node right;
+        private Node parent;
 
         public Node(int key) {
             this.key = key;
-            left = right = null;
+            left = right = parent = null;
         }
 
         public int getKey() {
@@ -21,12 +26,67 @@ public class BinarySearchTree {
     public BinarySearchTree(int key) {
         root = new Node(key);
     }
+
     public BinarySearchTree() {
         root = null;
     }
 
     public Node getRoot() {
         return root;
+    }
+
+    public boolean isEmpty() {
+        return root == null;
+    }
+
+    public Node insert(int key) {
+        root = insert(key, root);
+        return root;
+    }
+
+    public Node insert(int key, Node node) {
+        if (node == null) {
+            return new Node(key);
+        }
+        if (key > node.key) {
+            node.right = insert(key, node.right);
+            node.right.parent = node;
+        } else if (key < node.key) {
+            node.left = insert(key, node.left);
+            node.left.parent = node;
+        }
+        return node;
+    }
+
+    public Node find(int value) {
+        return find(value, root);
+    }
+
+    public Node find(int value, Node node) {
+        if (node != null) {
+            if (node.key == value) {
+                return node;
+            } else if (node.key > value) {
+                if (node.left != null) {
+                    return find(value, node.left);
+                }
+                return node;
+            } else {
+                if (node.right != null) {
+                    return find(value, node.right);
+                }
+            }
+            return node;
+        }
+        return null;
+    }
+
+    public Node next(Node node) {
+        if (node.right != null) {
+            return LeftDescendant(node.right);
+        } else {
+            return RightAncestor(node);
+        }
     }
 
     public Node LeftDescendant(Node node) {
@@ -37,49 +97,28 @@ public class BinarySearchTree {
         }
     }
 
-    public Node RightAncestor(Node node) { // Revisar si sirve
-        if (root != null) {
-            Node actual = root;
-            while (actual.left.key > node.key) {
-                actual = actual.left;
-            }
-            return actual;
-        }
-        return null;
-    }
-
-    public Node search(int value, Node node) {
-        Node nextNode = node.left;
-        if (node.key < value) {
-            nextNode = node.right;
-        }
-        if (nextNode != null) {
-            return search(value, nextNode);
-        }
-        return node;
-    }
-
-    public Node search(int value) {
-        return search(value, root);
-    }
-
-    public Node insert(int key) {
-        Node newNode = new Node(key);
-        if (root == null) {
-            root = newNode;
-            return root;
-        }
-        Node insertNode = search(key);
-        if (insertNode.key == key) {
-            inOrderTraversal();
-            return insertNode;
-        }
-        if (insertNode.key > key) {
-            insertNode.left = newNode;
+    public Node RightAncestor(Node node) {
+        if (node.key < node.parent.key) {
+            return node.parent;
         } else {
-            insertNode.right = newNode;
+            return RightAncestor(node.parent);
         }
-        return newNode;
+    }
+
+    public List<Node> rangeSearch(int x, int y) {
+        return rangeSearch(x,y,root);
+    }
+
+    public List<Node> rangeSearch(int x, int y, Node R) {
+        List<Node> L = new CircularArrayList<>();
+        Node N = find(x, R);
+        while (N != null && N.key <= y) {
+            if (N.key >= x) {
+                L.add(N);
+            }
+            N = next(N);
+        }
+        return L;
     }
 
     public void delete(int key) {
@@ -87,46 +126,40 @@ public class BinarySearchTree {
     }
 
     public Node delete(Node root, int key) {
-        // Return if the tree is empty
-        /*if (root == null)
+        if (root == null) {
             return root;
-
-        // Find the node to be deleted
-        if (key < root.key)
+        }
+        if (key < root.key) {
             root.left = delete(root.left, key);
-        else if (key > root.key)
+        } else if (key > root.key) {
             root.right = delete(root.right, key);
-        else {
-            // If the node is with only one child or no child
-            if (root.left == null)
+        } else {
+            if (root.left == null) {
                 return root.right;
-            else if (root.right == null)
+            } else if (root.right == null) {
                 return root.left;
-
-            // If the node has two children
-            // Place the inorder successor in position of the node to be deleted
+            }
             root.key = minValue(root.right);
-
-            // Delete the inorder successor
             root.right = delete(root.right, root.key);
-        }*/
+        }
         return root;
     }
 
-    public Node next(Node node) {
-        if (node.right != null) {
-            return LeftDescendant(node.right);
-        } else {
-            return RightAncestor(node);
+    private int minValue(Node node) {
+        int minValue = node.key;
+        while (node.left != null) {
+            minValue = node.left.key;
+            node = node.left;
         }
-
+        return minValue;
     }
 
     public void inOrderTraversal() {
         inOrderTraversal(root);
         System.out.println();
     }
-    public void inOrderTraversal(Node node) {
+
+    private void inOrderTraversal(Node node) {
         if (node != null) {
             inOrderTraversal(node.left);
             System.out.print(node.key + " ");
@@ -138,11 +171,12 @@ public class BinarySearchTree {
         preOrderTraversal(root);
         System.out.println();
     }
-    public void preOrderTraversal(Node node) {
+
+    private void preOrderTraversal(Node node) {
         if (node != null) {
             System.out.print(node.key + " ");
-            inOrderTraversal(node.left);
-            inOrderTraversal(node.right);
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
         }
     }
 
@@ -150,13 +184,12 @@ public class BinarySearchTree {
         postOrderTraversal(root);
         System.out.println();
     }
-    public void postOrderTraversal(Node node) {
+
+    private void postOrderTraversal(Node node) {
         if (node != null) {
-            inOrderTraversal(node.left);
-            inOrderTraversal(node.right);
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
             System.out.print(node.key + " ");
         }
     }
-
 }
-
