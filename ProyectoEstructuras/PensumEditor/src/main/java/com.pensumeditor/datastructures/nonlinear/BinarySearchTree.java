@@ -14,7 +14,7 @@ public class BinarySearchTree {
 
         public Node(int key) {
             this.key = key;
-            left = right = parent = null;
+            this.left = this.right = this.parent = null;
         }
 
         public int getKey() {
