@@ -3,6 +3,8 @@ package com.pensumeditor.datastructures.nonlinear;
 import com.pensumeditor.datastructures.linear.CircularArrayList;
 import com.pensumeditor.datastructures.linear.List;
 
+import java.nio.BufferUnderflowException;
+
 public class BinarySearchTree {
     public class Node {
         private int key;
@@ -35,6 +37,10 @@ public class BinarySearchTree {
         root = null;
     }
 
+    public void makeEmpty() {
+        root = null;
+    }
+
     public Node getRoot() {
         return root;
     }
@@ -48,7 +54,7 @@ public class BinarySearchTree {
         return root;
     }
 
-    public Node insert(int key, Node node) {
+    private Node insert(int key, Node node) {
         if (node == null) {
             return new Node(key);
         }
@@ -66,7 +72,7 @@ public class BinarySearchTree {
         return find(value, root);
     }
 
-    public Node find(int value, Node node) {
+    private Node find(int value, Node node) {
         if (node != null) {
             if (node.key == value) {
                 return node;
@@ -85,6 +91,59 @@ public class BinarySearchTree {
         return null;
     }
 
+    public int findMin(){
+        if (isEmpty()){
+            throw new BufferUnderflowException();
+        }
+        return findMin(root).key;
+    }
+
+    private Node findMin(Node node){
+        if (node == null){
+            return null;
+        } else if (node.left == null){
+            return node;
+        }
+        return findMin(node.left);
+    }
+
+    public int findMax() {
+        if (isEmpty()) {
+            throw new BufferUnderflowException();
+        }
+        return findMax(root).key;
+    }
+
+    private Node findMax(Node node) {
+        if (node == null) {
+            return null;
+        } else if (node.right == null) {
+            return node;
+        }
+        return findMax(node.right);
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+
+    public int size(){
+        return size(root);
+    }
+    public int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + size(node.left) + size(node.right);
+    }
+
     public Node next(Node node) {
         if (node.right != null) {
             return LeftDescendant(node.right);
@@ -93,7 +152,7 @@ public class BinarySearchTree {
         }
     }
 
-    public Node LeftDescendant(Node node) {
+    private Node LeftDescendant(Node node) {
         if (node.left != null) {
             return LeftDescendant(node.left);
         } else {
@@ -101,7 +160,7 @@ public class BinarySearchTree {
         }
     }
 
-    public Node RightAncestor(Node node) {
+    private Node RightAncestor(Node node) {
         if (node != null) {
             if (node.parent != null && node.key < node.parent.key) {
                 return node.parent;
@@ -116,7 +175,7 @@ public class BinarySearchTree {
         return rangeSearch(x,y,root);
     }
 
-    public List<Node> rangeSearch(int x, int y, Node R) {
+    private List<Node> rangeSearch(int x, int y, Node R) {
         List<Node> L = new CircularArrayList<>();
         Node N = find(x, R);
         while (N != null && N.key <= y) {
@@ -136,7 +195,7 @@ public class BinarySearchTree {
             System.out.println("Element doesn't exist.");
         }
     }
-    public void delete(Node N) {
+    private void delete(Node N) {
         if (N.right == null) {
             if (N.parent != null) {
                 if (N.parent.left == N) {
