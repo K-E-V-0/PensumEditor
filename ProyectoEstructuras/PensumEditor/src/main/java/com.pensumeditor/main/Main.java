@@ -6,11 +6,11 @@ import com.pensumeditor.datastructures.nonlinear.Tree;
 public class Main {
 
     public static void main(String[] args) {
-
+        System.out.println("kevvvvv");
         UserInterface userInterface = new UserInterface();
 
         userInterface.startMenu();
-        System.out.println("kevvvvv");
+
 
 
     }
