@@ -4,6 +4,9 @@ import com.pensumeditor.data.Pensum;
 import com.pensumeditor.data.PositionSubject;
 import com.pensumeditor.data.Subject;
 import com.pensumeditor.datastructures.linear.*;
+import com.pensumeditor.datastructures.nonlinear.AVLTree;
+import com.pensumeditor.datastructures.nonlinear.BinarySearchTree;
+import com.pensumeditor.datastructures.nonlinear.Tree;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
 import java.util.Random;
@@ -406,49 +409,42 @@ public class UserInterface {
                         Ya que las materias se identifican por código, todos los test se hacen sobre
                         una lista de enteros que representan los códigos de materias (List<Integer>)
                         ¿Qué implementación deseas utilizar?
-                        1) ArrayList (Lista dinamica)
-                        2) CircularArrayList (Lista dinamica circular)
-                        3) LinkedList (Lista enlazada)
-                        4) DoubleLinkedList (Lista enlazada doble)
-                        5) Volver al menú principal
+                        1) AVLTree
+                        2) BSTree
                         """
                 );
-        List<Integer> dataStructure = null;
+        Tree treeStructure = null;
         int option = sc.nextInt();
 
         if (option == 1) {
-            dataStructure = new ArrayList<>();
+            treeStructure = new AVLTree();
         } else if (option == 2) {
-            dataStructure = new CircularArrayList<>();
+            treeStructure = new BinarySearchTree();
         } else if (option == 3) {
-            dataStructure = new LinkedList<>();
-        } else if (option == 4){
-            dataStructure = new DoubleLinkedList<>();
-        } else if (option == 5){
             startMenu();
         }
 
-        dataStructure.add(1);
-        System.out.println("Por default la lista tiene el dato 1 agregado.");
+        treeStructure.insert(1);
+        System.out.println("Por default el arbol tiene el dato 1 agregado.");
 
         System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar: ");
 
-        methodOptions(dataStructure, sc.nextInt());
+        methodOptions(treeStructure, sc.nextInt());
 
     }
 
-    public void methodOptions(List<Integer> dataStructure, int n) {
+    public void methodOptions(Tree treeStructure, int n) {
         Random random = new Random();
         System.out.println
                 (
                         """
                         Las operaciones posibles son:
                        
-                        1) Agregar n datos aleatorios con pushBack()
-                        2) Obtener n datos en indices aleatorios con get()
-                        3) Sobreescribir n datos aleatorios en indices aleatorios con set()
-                        4) Encontrar n datos aleatorios con search()
-                        5) Eliminar n datos con indices aleatorios con remove()
+                        1) Agregar n datos aleatorios con insert()
+                        2) Enontrar n datos aleatorios con searh()
+                        3) Enontrar el elemento menor n veces con findMin()
+                        4) Enontrar el elemento mayor n veces con findMax()
+                        5) Eliminar n datos con indices aleatorios con delete()
                         
                         9) Volver al menú principal
                         """
@@ -458,7 +454,7 @@ public class UserInterface {
             case 1:
                 long inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    dataStructure.pushBack(random.nextInt(255));
+                    treeStructure.insert(random.nextInt(255));
                 }
                 long fin = System.nanoTime();
                 long duracion = fin-inicio;
@@ -467,7 +463,7 @@ public class UserInterface {
             case 2:
                 inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    dataStructure.get(random.nextInt(dataStructure.getSize()));
+                    treeStructure.search(random.nextInt(255));
                 }
                 fin = System.nanoTime();
                 duracion = fin-inicio;
@@ -476,7 +472,7 @@ public class UserInterface {
             case 3:
                 inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    dataStructure.set(random.nextInt(255), random.nextInt(dataStructure.getSize()));
+                    treeStructure.findMin();
                 }
                 fin = System.nanoTime();
                 duracion = fin-inicio;
@@ -485,7 +481,7 @@ public class UserInterface {
             case 4:
                 inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    dataStructure.search(random.nextInt(255));
+                    treeStructure.findMax();
                 }
                 fin = System.nanoTime();
                 duracion = fin-inicio;
@@ -494,8 +490,8 @@ public class UserInterface {
             case 5:
                inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    System.out.println(dataStructure.getSize());
-                    dataStructure.remove(random.nextInt(dataStructure.getSize()));
+                    System.out.println(treeStructure.size());
+                    treeStructure.delete(random.nextInt(255));
                 }
                 fin = System.nanoTime();
                 duracion = fin-inicio;
@@ -504,14 +500,14 @@ public class UserInterface {
             default:
                 if (option != 6) {
                     System.out.println("Opción invalida");
-                    methodOptions(dataStructure, n);
+                    methodOptions(treeStructure, n);
                 }
                 startMenu();
         }
-        //System.out.println(dataStructure);
+        //System.out.println(treeStructure);
         System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar ahora: ");
         n = sc.nextInt();
-        methodOptions(dataStructure, n);
+        methodOptions(treeStructure, n);
     }
 
 }
