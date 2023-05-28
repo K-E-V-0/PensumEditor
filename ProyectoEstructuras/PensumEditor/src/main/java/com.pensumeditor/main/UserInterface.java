@@ -458,7 +458,7 @@ public class UserInterface {
                 }
                 long fin = System.nanoTime();
                 double duracion = (fin - inicio) / 1000000.0;
-                System.out.printf("%.2f%n", duracion); // Imprime el valor con 2 decimales
+                System.out.printf("%.3f%n", duracion); // Imprime el valor con 2 decimales
                 break;
             case 2:
                 inicio = System.nanoTime();
@@ -467,7 +467,7 @@ public class UserInterface {
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.2f%n", duracion);
+                System.out.printf("%.3f%n", duracion);
                 break;
             case 3:
                 inicio = System.nanoTime();
@@ -476,7 +476,7 @@ public class UserInterface {
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.2f%n", duracion);
+                System.out.printf("%.3f%n", duracion);
                 break;
             case 4:
                 inicio = System.nanoTime();
@@ -485,7 +485,7 @@ public class UserInterface {
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.2f%n", duracion);
+                System.out.printf("%.3f%n", duracion);
                 break;
             case 5:
                inicio = System.nanoTime();
@@ -494,7 +494,7 @@ public class UserInterface {
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.2f%n", duracion);
+                System.out.printf("%.3f%n", duracion);
                 break;
             default:
                 if (option != 6) {
