@@ -441,9 +441,9 @@ public class UserInterface {
                         Las operaciones posibles son:
                        
                         1) Agregar n datos aleatorios con insert()
-                        2) Enontrar n datos aleatorios con searh()
-                        3) Enontrar el elemento menor n veces con findMin()
-                        4) Enontrar el elemento mayor n veces con findMax()
+                        2) Encontrar n datos aleatorios con search()
+                        3) Encontrar el elemento menor n veces con findMin()
+                        4) Encontrar el elemento mayor n veces con findMax()
                         5) Eliminar n datos con indices aleatorios con delete()
                         
                         9) Volver al menú principal
@@ -490,7 +490,6 @@ public class UserInterface {
             case 5:
                inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    System.out.println(treeStructure.size());
                     treeStructure.delete(random.nextInt(255));
                 }
                 fin = System.nanoTime();
