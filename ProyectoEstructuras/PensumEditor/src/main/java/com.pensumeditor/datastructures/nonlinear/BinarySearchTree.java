@@ -191,13 +191,14 @@ public class BinarySearchTree implements Tree {
     }
 
     public void delete(int value) {
-        if (find(value).key == value) {
-            delete(find(value));
-        }
-        else {
+        Node nodeToDelete = find(value);
+        if (nodeToDelete != null && nodeToDelete.key == value) {
+            delete(nodeToDelete);
+        } else {
             System.out.println("Element doesn't exist.");
         }
     }
+
     private void delete(Node N) {
         if (N.right == null) {
             if (N.parent != null) {
