@@ -453,12 +453,12 @@ public class UserInterface {
         switch (option) {
             case 1:
                 long inicio = System.nanoTime();
-                for (int i = 0; i < n; i ++) {
+                for (int i = 0; i < n; i++) {
                     treeStructure.insert(random.nextInt(255));
                 }
                 long fin = System.nanoTime();
-                long duracion = fin-inicio;
-                System.out.println(duracion);
+                double duracion = (fin - inicio) / 1000000.0;
+                System.out.printf("%.2f%n", duracion); // Imprime el valor con 2 decimales
                 break;
             case 2:
                 inicio = System.nanoTime();
@@ -466,8 +466,8 @@ public class UserInterface {
                     treeStructure.search(random.nextInt(255));
                 }
                 fin = System.nanoTime();
-                duracion = fin-inicio;
-                System.out.println(duracion);
+                duracion = (fin-inicio) / 1000000.0;
+                System.out.printf("%.2f%n", duracion);
                 break;
             case 3:
                 inicio = System.nanoTime();
@@ -475,8 +475,8 @@ public class UserInterface {
                     treeStructure.findMin();
                 }
                 fin = System.nanoTime();
-                duracion = fin-inicio;
-                System.out.println(duracion);
+                duracion = (fin-inicio) / 1000000.0;
+                System.out.printf("%.2f%n", duracion);
                 break;
             case 4:
                 inicio = System.nanoTime();
@@ -484,8 +484,8 @@ public class UserInterface {
                     treeStructure.findMax();
                 }
                 fin = System.nanoTime();
-                duracion = fin-inicio;
-                System.out.println(duracion);
+                duracion = (fin-inicio) / 1000000.0;
+                System.out.printf("%.2f%n", duracion);
                 break;
             case 5:
                inicio = System.nanoTime();
@@ -494,8 +494,8 @@ public class UserInterface {
                     treeStructure.delete(random.nextInt(255));
                 }
                 fin = System.nanoTime();
-                duracion = fin-inicio;
-                System.out.println(duracion);
+                duracion = (fin-inicio) / 1000000.0;
+                System.out.printf("%.2f%n", duracion);
                 break;
             default:
                 if (option != 6) {
