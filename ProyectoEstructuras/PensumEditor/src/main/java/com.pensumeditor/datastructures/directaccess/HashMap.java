@@ -54,8 +54,8 @@ public class HashMap<K, V>{
     public HashMap(int capacity, double loadFactor) {
         random = new Random();
         this.p = 10000019;
-        this.a = random.nextInt();
-        this.b = random.nextInt();
+        this.a = random.nextInt(1, p-1);
+        this.b = random.nextInt(0, p-1);
         this.capacity = capacity;
         this.loadFactor = loadFactor;
         hashTable = new LinkedList[capacity];
