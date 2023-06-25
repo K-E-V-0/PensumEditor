@@ -9,6 +9,7 @@ import com.pensumeditor.datastructures.nonlinear.BinarySearchTree;
 import com.pensumeditor.datastructures.nonlinear.Tree;
 import com.pensumeditor.pensums.Ing_Sistemas;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -402,59 +403,36 @@ public class UserInterface {
     }
 
     public void tests() {
-        System.out.println
-                (
-                        """
-                        Bienvenido al menu de test
-                        Ya que las materias se identifican por código, todos los test se hacen sobre
-                        una lista de enteros que representan los códigos de materias (List<Integer>)
-                        ¿Qué implementación deseas utilizar?
-                        1) AVLTree
-                        2) BSTree
-                        """
-                );
-        Tree treeStructure = null;
-        int option = sc.nextInt();
+        System.out.println("Bienvenido al menú de pruebas.");
 
-        if (option == 1) {
-            treeStructure = new AVLTree();
-        } else if (option == 2) {
-            treeStructure = new BinarySearchTree();
-        } else if (option == 3) {
-            startMenu();
-        }
-
-        treeStructure.insert(1);
-        System.out.println("Por default el arbol tiene el dato 1 agregado.");
-
-        System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar: ");
-
-        methodOptions(treeStructure, sc.nextInt());
-
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        hashMap.put(1, 1);
+        System.out.println("Por defecto, el mapa tiene el dato 1 agregado.");
+        System.out.println("Ingresa la cantidad de datos 'n' con los que deseas trabajar: ");
+        int n = sc.nextInt();
+        methodOptions(hashMap, n);
     }
 
-    public void methodOptions(Tree treeStructure, int n) {
+
+    public void methodOptions(HashMap<Integer, Integer> hashMap, int n) {
         Random random = new Random();
-        System.out.println
-                (
-                        """
-                        Las operaciones posibles son:
-                       
-                        1) Agregar n datos aleatorios con insert()
-                        2) Encontrar n datos aleatorios con search()
-                        3) Encontrar el elemento menor n veces con findMin()
-                        4) Encontrar el elemento mayor n veces con findMax()
-                        5) Eliminar n datos con indices aleatorios con delete()
-                        
-                        9) Volver al menú principal
-                        """
-                );
+        System.out.println(
+                """
+                Las operaciones posibles son:
+                
+                1) Agregar n datos aleatorios con put()
+                2) Encontrar n datos aleatorios con get()
+                3) Eliminar n datos aleatorios con remove()
+                
+                9) Volver al menú principal
+                """
+        );
         int option = sc.nextInt();
         switch (option) {
             case 1:
                 long inicio = System.nanoTime();
                 for (int i = 0; i < n; i++) {
-                    treeStructure.insert(random.nextInt(255));
+                    hashMap.put(random.nextInt(255), random.nextInt(255));
                 }
                 long fin = System.nanoTime();
                 double duracion = (fin - inicio) / 1000000.0;
@@ -463,7 +441,7 @@ public class UserInterface {
             case 2:
                 inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    treeStructure.search(random.nextInt(255));
+                    hashMap.get(random.nextInt(255));
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
@@ -472,41 +450,23 @@ public class UserInterface {
             case 3:
                 inicio = System.nanoTime();
                 for (int i = 0; i < n; i ++) {
-                    treeStructure.findMin();
-                }
-                fin = System.nanoTime();
-                duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.3f%n", duracion);
-                break;
-            case 4:
-                inicio = System.nanoTime();
-                for (int i = 0; i < n; i ++) {
-                    treeStructure.findMax();
-                }
-                fin = System.nanoTime();
-                duracion = (fin-inicio) / 1000000.0;
-                System.out.printf("%.3f%n", duracion);
-                break;
-            case 5:
-               inicio = System.nanoTime();
-                for (int i = 0; i < n; i ++) {
-                    treeStructure.delete(random.nextInt(255));
+                    hashMap.remove(random.nextInt(255));
                 }
                 fin = System.nanoTime();
                 duracion = (fin-inicio) / 1000000.0;
                 System.out.printf("%.3f%n", duracion);
                 break;
             default:
-                if (option != 6) {
+                if (option != 9) {
                     System.out.println("Opción invalida");
-                    methodOptions(treeStructure, n);
+                    methodOptions(hashMap, n);
                 }
                 startMenu();
         }
         //System.out.println(treeStructure);
         System.out.println("Ingresa la cantidad de datos 'n' que quieres trabajar ahora: ");
         n = sc.nextInt();
-        methodOptions(treeStructure, n);
+        methodOptions(hashMap, n);
     }
 
 }
