@@ -115,17 +115,20 @@ public class HashMap<K, V>{
         throw new KeyNotFoundException();
     }
 
-    public V remove(K key) {
+    public boolean remove(K key) {
         int index = hash(key, capacity);
         if (Objects.nonNull(hashTable[index]) && hashTable[index].getSize() > 0) {
-            for (int i = 0; i < capacity; i++) {
+            for (int i = 0; i < hashTable[index].getSize(); i++) {
                 if (hashTable[index].get(i).getKey().equals(key)) {
-                    return hashTable[index].remove(i).getValue();
+                    hashTable[index].remove(i);
+                    return true;
                 }
             }
         }
-        throw new KeyNotFoundException();
+        return false;
     }
+
+
 
     private boolean containsKey(K key) {
         int index = hash(key, capacity);

@@ -2,7 +2,7 @@ package com.pensumeditor.main;
 
 import com.pensumeditor.datastructures.nonlinear.AVLTree;
 import com.pensumeditor.datastructures.nonlinear.Tree;
-
+import com.pensumeditor.datastructures.directaccess.HashMap;
 public class Main {
 
     public static void main(String[] args) {
