@@ -8,10 +8,15 @@ import java.util.Objects;
 import java.util.Random;
 
 public class HashMap<K, V>{
+    private int count;
 
+    public int getCount(){
+        return count;
+    };
     private class MapNode {
         private K key;
         private V value;
+
 
         public MapNode(K key, V value) {
             this.key = key;
@@ -91,9 +96,11 @@ public class HashMap<K, V>{
         int index = hash(key, capacity);
         if (Objects.isNull(hashTable[index])) {
             hashTable[index] = new LinkedList<MapNode>();
+            count --;
         }
         hashTable[index].add(new MapNode(key,value));
         size++;
+        count ++;
     }
 
     public V get(K key) {

@@ -8,8 +8,8 @@ import com.pensumeditor.datastructures.nonlinear.AVLTree;
 import com.pensumeditor.datastructures.nonlinear.BinarySearchTree;
 import com.pensumeditor.datastructures.nonlinear.Tree;
 import com.pensumeditor.pensums.Ing_Sistemas;
+import com.pensumeditor.datastructures.directaccess.HashMap;
 
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -437,6 +437,7 @@ public class UserInterface {
                 long fin = System.nanoTime();
                 double duracion = (fin - inicio) / 1000000.0;
                 System.out.printf("%.3f%n", duracion); // Imprime el valor con 2 decimales
+                System.out.println(hashMap.getCount());
                 break;
             case 2:
                 inicio = System.nanoTime();
@@ -468,5 +469,6 @@ public class UserInterface {
         n = sc.nextInt();
         methodOptions(hashMap, n);
     }
+
 
 }
